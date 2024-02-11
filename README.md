@@ -1,4 +1,4 @@
-![image](https://github.com/zanzilla22/Dunamis/assets/69683242/10f1ca21-7b1c-441e-9750-5e525faa34d3)# Dunamis
+# Dunamis
 _Dunamis (Ancient Greek: δύναμις) is a Greek philosophical concept meaning "power", "potential" or "ability"_
 
 CNLC '24 Coding Submission | Platform where students, co-op managers, SHSM heads and organizers can collaborate.
