@@ -1,0 +1,108 @@
+:root {
+  --primary: #4A90E2; /* A brighter shade for primary actions */
+  --secondary: #F5A623; /* Secondary color for accents */
+  --light: #FFFFFF;
+  --dark: #4A4A4A;
+  --background-color: #F4F4F4; /* Softer background */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+body {
+  /* Body styles adjusted for flex alignment */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  padding: 10px; /* Added padding for a little space around edges on mobile screens */
+  background-color: var(--background-color);
+}
+
+.App {
+  width: 100%;
+  max-width: 600px; /* Adjusted for a wider form on PC */
+}
+
+.form-container {
+  background: var(--light);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  width: 100%; /* Ensures the container fills the .App width */
+}
+
+.logo {
+  display: block;
+  margin: 0 auto 20px; /* Center the logo and add space below it */
+  max-width: 100%; /* Ensure the logo is responsive */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.submit-btn, .toggle-btn {
+  background-color: var(--primary);
+  color: var(--light);
+  border: none;
+  padding: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  text-transform: uppercase;
+  display: block; /* Make buttons block elements to take the margin property */
+  margin: 10px auto;
+}
+
+.submit-btn:hover, .toggle-btn:hover {
+  background-color: var(--secondary);
+}
+
+.toggle-btn {
+  background-color: transparent;
+  color: var(--dark);
+  text-decoration: underline;
+  margin-top: 20px;
+}
+
+h1 {
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.auth-alternatives {
+  margin-top: 20px;
+  text-align: center;
+}
+.error-message {
+  color: red;
+  margin-top: 10px;
+  text-align: center;
+}
+
+
+@media (max-width: 768px) {
+  .App {
+    max-width: 100%; /* Allows the form to be more fluid on smaller screens */
+  }
+
+  .form-container {
+    padding: 15px; /* Slightly reduce padding on smaller screens */
+  }
+}

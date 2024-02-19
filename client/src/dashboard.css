@@ -1,0 +1,146 @@
+.App {
+  font-family: "Segoe UI", sans-serif;
+  color: #333;
+  background-color: #f4f4f4;
+  min-height: 100vh;
+  min-width: 70vw; /* Or any other max-width */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dashboard-header {
+  background-color: #ffffff;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-logo {
+  height: 50px;
+  cursor: pointer;
+}
+
+.dashboard-nav {
+  display: flex;
+}
+
+.dashboard-nav-item {
+  background: none;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+  cursor: pointer;
+  font-weight: bold;
+  color: #333;
+}
+
+.dashboard-nav-item:hover {
+  color: #007bff;
+}
+
+.profile-icon {
+  width: 50px;
+  height: 50px;
+  background-color: #ddd;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.main-content {
+  padding: 2rem;
+  max-width: 1200px; /* Adjust this value to your preference */
+  margin: auto; /* This will center the content if the view is wider than max-width */
+}
+
+.dashboard-intro h1 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-intro p {
+  font-size: 16px;
+  color: #666;
+}
+
+.opportunities-search {
+  margin: 2rem 0;
+  /* Add styles for the search bar and filters */
+}
+
+.opportunities-list {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+}
+
+.opportunity-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+  /* You can remove max-width if you want full width for opportunity items */
+}
+
+.opportunity-item:last-child {
+  border-bottom: none;
+}
+
+.opportunity-logo {
+  width: 50px;
+  height: 50px;
+  margin-right: 1rem;
+}
+
+.opportunity-details {
+  flex-grow: 1;
+}
+
+.opportunity-title {
+  font-size: 18px;
+  margin: 0;
+}
+
+.opportunity-organization {
+  font-size: 14px;
+  color: #666;
+}
+
+.opportunity-location,
+.opportunity-applicants,
+.opportunity-posted-time {
+  font-size: 12px;
+  color: #999;
+  margin-right: 1rem;
+}
+
+.quick-apply-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.quick-apply-button:hover {
+  background-color: #0056b3;
+}
+
+.load-more-button {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  background-color: #fff;
+  color: #007bff;
+  border: 1px solid #007bff;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+.load-more-button:hover {
+  background-color: #f0f0f0;
+}
