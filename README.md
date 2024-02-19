@@ -26,7 +26,6 @@ git clone https://github.com/idurar/idurar-erp-crm.git
 ```bash
 cd idurar-erp-crm
 ```
-
 #### Step 2: Create Your MongoDB Account and Database/Cluster
 
 - Create your own MongoDB account by visiting the MongoDB website and signing up for a new account.
@@ -37,7 +36,7 @@ cd idurar-erp-crm
 
 #### Step 3: Edit the Environment File
 
-- Check a file named .env in the /backend directory.
+- Check a file named .env in the /api directory.
 
   This file will store environment variables for the project to run.
 
@@ -50,7 +49,7 @@ In the .env file, find the line that reads:
 Replace "your-mongodb-uri" with the actual URI of your MongoDB database.
 #### Step 5: Install Backend Dependencies
 
-In your terminal, navigate to the /backend directory
+In your terminal, navigate to the /api directory
 
 ```bash
 cd backend
@@ -64,43 +63,39 @@ npm install
 
 This command will install all the required packages specified in the package.json file.
 
-#### Step 6: Run Setup Script
+#### Step 6: Run Backend Script
 
-While still in the /backend directory of the project, execute the following command to run the setup script:
-
-```bash
-npm run setup
-```
-
-This setup script may perform necessary database migrations or any other initialization tasks required for the project.
-
-#### Step 7: Run the Backend Server
-
-In the same terminal, run the following command to start the backend server:
+While still in the /api directory of the project, execute the following command to run the setup script:
 
 ```bash
-npm run dev
+npm start
 ```
+
+This should connect to the backend server. Without issue
 
 This command will start the backend server, and it will listen for incoming requests.
-#### Step 8: Install Frontend Dependencies
+#### Step 7: Install Frontend Dependencies
 
-Open a new terminal window , and run the following command to install the frontend dependencies:
+Open a new terminal window, and run the following command to install the frontend dependencies:
 
 ```bash
-cd frontend
+cd client
 ```
 
 ```bash
 npm install
 ```
 
-#### Step 9: Run the Frontend Server
+#### Step 8: Run the Frontend Server
 
-After installing the frontend dependencies, run the following command in the same terminal to start the frontend server:
+After installing the frontend dependencies, you need to change openssl to legacy:
+```bash
+set NODE_OPTIONS=--openssl-legacy-provider
+```
+Then run the following command in the same terminal to start the frontend server:
 
 ```bash
-npm run dev
+npm start
 ```
 
 This command will start the frontend server, and you'll be able to access the website on localhost:3000 in your web browser.
