@@ -20,11 +20,11 @@ It leverages technology to provide an integrated environment where users can exp
 #### Step 1: Clone the repository
 
 ```bash
-git clone https://github.com/idurar/idurar-erp-crm.git
+git clone https://github.com/zanzilla22/Dunamis
 ```
 
 ```bash
-cd idurar-erp-crm
+cd Dunamis
 ```
 #### Step 2: Create Your MongoDB Account and Database/Cluster
 
