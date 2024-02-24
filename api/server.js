@@ -16,6 +16,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); // Enable preflight requests for all routes
 
 // Environment variables
 const PORT = process.env.PORT || 3001;
