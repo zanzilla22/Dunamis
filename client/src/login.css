@@ -1,7 +1,7 @@
 :root {
   --primary: #4A90E2; /* A brighter shade for primary actions */
   --secondary: #F5A623; /* Secondary color for accents */
-  --light: #4A4A4A;
+  --light: #FFFFFF;
   --dark: #4A4A4A;
   --background-color: #F4F4F4; /* Softer background */
 }
@@ -15,7 +15,7 @@
 
 body {
   /* Body styles adjusted for flex alignment */
-  display: block;
+  display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -31,7 +31,7 @@ body {
 }
 
 .form-container {
-  background: var(--dark);
+  background: var(--light);
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
@@ -59,7 +59,7 @@ input, select {
 
 .submit-btn, .toggle-btn {
   background-color: var(--primary);
-  color: var(--dark);
+  color: var(--light);
   border: none;
   padding: 10px;
   font-weight: bold;

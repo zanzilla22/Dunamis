@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { GoogleLogin } from 'react-google-login';
-import { useNavigate } from 'react-router-dom'; // For redirection after login/register
-import { useAuth } from '../context/AuthContext'; // Adjust the path as necessary
-import '../app.css';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 function LoginPage() {
-  const [isLogin, setIsLogin] = useState(true); // Toggle between Login and Register
-  const [userRole, setUserRole] = useState(""); // 'students', 'teachers', 'co_op_representatives'
+  const [isLogin, setIsLogin] = useState(true);
+  const [userRole, setUserRole] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [nameFirst, setNameFirst] = useState(""); // Only used for registration
-  const [nameLast, setNameLast] = useState(""); // Only used for registration
-  const [error, setError] = useState(""); // To display error messages
+  const [nameFirst, setNameFirst] = useState("");
+  const [nameLast, setNameLast] = useState("");
+  const [error, setError] = useState("");
   const api_base = 'http://localhost:3001';
-  const navigate = useNavigate(); // Hook for navigating to another route
-  const { login } = useAuth();
-  const { currentUser } = useAuth();
+  const navigate = useNavigate();
+  const { login, currentUser } = useAuth();
+
   useEffect(() => {
     if (currentUser) {
       const redirectToDashboard = {
@@ -27,18 +26,17 @@ function LoginPage() {
       navigate(dashboardPath);
     }
   }, [currentUser, navigate]);
+
   const handleRoleChange = (e) => {
     setUserRole(e.target.value);
   };
 
   const responseGoogle = (response) => {
     console.log(response);
-    // Handle Google authentication logic here
   };
 
   const handleAuth = async (e) => {
     e.preventDefault();
-    // Simplify role matching to match your server and AuthContext expectations
     const adjustedRole = {
       'student': 'student',
       'teacher': 'teacher',
@@ -46,8 +44,7 @@ function LoginPage() {
     }[userRole];
 
     try {
-
-      if(!isLogin) {
+      if (!isLogin) {
         const url = `${api_base}/${userRole}/register`;
         const payload = { email, password, nameFirst, nameLast };
         try {
@@ -70,7 +67,7 @@ function LoginPage() {
         }
       }
       await login(email, password, adjustedRole);
-      navigate('/dashboard'); // Redirect user on successful login
+      navigate('/dashboard');
     } catch (error) {
       setError(error.response?.data?.error || error.message);
       console.error('Authentication Error:', error);
@@ -78,50 +75,54 @@ function LoginPage() {
   };
 
   return (
-    <div className="App">
-      <div className="form-container">
-        <img src="/dunamis-logo.png" alt="Dunamis Logo" className="logo"/>
-        <h1>{isLogin ? 'Login' : 'Register'}</h1>
-        {error && <div className="error-message">{error}</div>}
+    <div className="flex justify-center items-center h-screen bg-gray-200 px-4">
+      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-lg">
+        <img src="/dunamis-logo.png" alt="Dunamis Logo" className="block mx-auto mb-8 max-w-full h-auto"/>
+        <h1 className="font-sans text-blue-500 text-center text-4xl font-bold mb-8" style={{ fontFamily: 'Segoe UI, sans-serif' }}>
+          {isLogin ? 'Login' : 'Register'}
+        </h1>
+        {error && <div className="text-red-500 text-center mt-4">{error}</div>}
         <form onSubmit={handleAuth}>
           {!isLogin && (
             <>
-              <div className="input-group">
-                <input type="text" placeholder="First Name" value={nameFirst} onChange={(e) => setNameFirst(e.target.value)} />
+              <div className="mb-4">
+                <input type="text" placeholder="First Name" value={nameFirst} onChange={(e) => setNameFirst(e.target.value)} className="w-full p-2 mt-2 border border-gray-300 rounded-md" />
               </div>
-              <div className="input-group">
-                <input type="text" placeholder="Last Name" value={nameLast} onChange={(e) => setNameLast(e.target.value)} />
+              <div className="mb-4">
+                <input type="text" placeholder="Last Name" value={nameLast} onChange={(e) => setNameLast(e.target.value)} className="w-full p-2 mt-2 border border-gray-300 rounded-md" />
               </div>
             </>
           )}
-          <div className="input-group">
-            <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <div className="mb-4">
+            <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full p-2 mt-2 border border-gray-300 rounded-md" />
           </div>
-          <div className="input-group">
-            <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <div className="mb-4">
+            <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full p-2 mt-2 border border-gray-300 rounded-md" />
           </div>
-          <div className="input-group">
-            <select value={userRole} onChange={handleRoleChange} required>
-              <option value="">Select Role</option>
-              <option value="student">Student</option>
-              <option value="teacher">Teacher</option>
-              <option value="co_op_representative">Co-Op Representative</option>
-            </select>
+          <div className="mb-4">
+          <select value={userRole} onChange={handleRoleChange} required className="w-full p-2 mt-2 border border-gray-300 rounded-md text-gray-800 bg-white">
+            <option value="">Select Role</option>
+            <option value="student">Student</option>
+            <option value="teacher">Teacher</option>
+            <option value="co_op_representative">Co-Op Representative</option>
+          </select>
+
           </div>
-          {/* Error message */}
-          {error && <div className="error-message">{error}</div>}
-          <button type="submit" className="submit-btn">{isLogin ? 'Login' : 'Register'}</button>
+          <button type="submit" className="bg-blue-500 text-white font-bold py-2 rounded-md text-uppercase block w-full hover:bg-orange-500 transition-colors">
+            {isLogin ? 'Login' : 'Register'}
+          </button>
         </form>
-        <div className="auth-alternatives">
+        <div className="text-center mt-4">
           <GoogleLogin
-            clientId="240699630959-ij4ouks2s7i4hhuav6binmbv04pus84a.apps.googleusercontent.com"
+            clientId="your_client_id.apps.googleusercontent.com"
             buttonText={isLogin ? 'Login with Google' : 'Register with Google'}
             onSuccess={responseGoogle}
             onFailure={responseGoogle}
             cookiePolicy={'single_host_origin'}
+            className="google-login"
           />
         </div>
-        <button className="toggle-btn" onClick={() => setIsLogin(!isLogin)}>
+        <button className="mt-4 underline text-gray-800 hover:text-gray-600 transition-colors text-center w-full" onClick={() => setIsLogin(!isLogin)}>
           {isLogin ? 'Need to register?' : 'Already registered?'}
         </button>
       </div>

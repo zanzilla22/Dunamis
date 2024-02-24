@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import '../app.css';
 function TeacherDashboard() {
 
   const api_base = 'http://localhost:3001';

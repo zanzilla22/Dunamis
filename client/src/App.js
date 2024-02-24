@@ -3,9 +3,9 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext'; // Make sure you export useAuth from AuthContext
 import LoginPage from './components/LoginPage';
-import StudentDashboard from './components/StudentDashboard';
-import TeacherDashboard from './components/TeacherDashboard';
-import CoOpManagerDashboard from './components/CoOpManagerDashboard';
+import StudentDashboard from './components/Student/StudentDashboard';
+import TeacherDashboard from './components/Teacher/TeacherDashboard';
+import CoOpManagerDashboard from './components/CoOpManager/CoOpManagerDashboard';
 import { ProtectedRoute } from './components/ProtectedRoute'; // Assume you create this component
 
 const RedirectToDashboard = () => {
