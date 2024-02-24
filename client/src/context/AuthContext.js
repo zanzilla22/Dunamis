@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password, role) => {
     try {
       console.log("LOGGINGGGINGGG");
-      const response = await axios.post(`http://localhost:3001/${role}/login`, { email, password });
+      const response = await axios.post(`https://dunamis-api.vercel.app/${role}/login`, { email, password });
       const { token, role: userRole } = response.data; // Assuming the server responds with a token and the user's role
 
       const user = { token, role: userRole, email }; // Construct a user object
@@ -46,7 +46,7 @@ export const AuthProvider = ({ children }) => {
   // Function to register users
   const register = async (userData, role) => {
     try {
-      await axios.post(`http://localhost:3001/${role}/register`, userData);
+      await axios.post(`https://dunamis-api.vercel.app//${role}/register`, userData);
       // Optionally log in the user immediately after registration
       await login(userData.email, userData.password, role);
       setAuthError('');
