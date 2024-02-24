@@ -127,7 +127,9 @@ app.post('/:userType/login', async (req, res) => {
   }
 });
 
-
+app.get("/", (req, res) => {
+  res.json("DB");
+});
 // Example protected route
 app.get('/protected', authenticateToken, (req, res) => {
   res.json({ message: "Access to protected data" });
