@@ -7,7 +7,15 @@ require('dotenv').config(); // To use environment variables for sensitive inform
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+
+// cors from frontend deployment url
+const corsOptions = {
+  origin: ["https://mydunamis.vercel.app", "http://localhost:3000"], // Add "http://" or "https://" as appropriate
+  methods: ["POST", "GET"], // Specify each method as a separate item in the array
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 // Environment variables
 const PORT = process.env.PORT || 3001;
