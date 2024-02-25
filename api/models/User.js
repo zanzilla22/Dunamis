@@ -33,7 +33,7 @@ const teacherSchema = new Schema({
   nameLast: String,
   password: String,
   email: { type: String, required: true, unique: true },
-  shsmPrograms: [{ type: String }],
+  shsmProgram: String,
   subjects: [{ type: String }],
   description: String,
   school: String,

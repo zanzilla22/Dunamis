@@ -1,7 +1,9 @@
-[
-  "Business",
-  "Health and Wellness",
-  "Information Technology",
-  "Arts and Culture",
-  "Agriculture"
-]
+{
+  "shsmPrograms": [
+    "Business",
+    "Health and Wellness",
+    "Information Technology",
+    "Arts and Culture",
+    "Agriculture"
+  ]
+}

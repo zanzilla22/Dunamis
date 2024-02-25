@@ -20,6 +20,11 @@ import ListedCoops from './components/coOpRepresentative/ListedCoops';
 import Messages_Coop from './components/coOpRepresentative/Messages';
 import EditProfile_Coop from './components/coOpRepresentative/EditProfile';
 
+//teacher dashboard elements
+import SHSMs from './components/Teacher/SHSMs';
+import Messages_Teacher from './components/Teacher/Messages';
+import EditProfile_Teacher from './components/Teacher/EditProfile';
+
 import { ProtectedRoute } from './components/ProtectedRoute'; // Assuming this component exists
 
 function App() {
@@ -45,9 +50,16 @@ function App() {
           } />
 
           {/* Teacher Routes */}
-          <Route path="/teacher" element={
+          <Route path="/teacher/*" element={
             <ProtectedRoute allowedRoles={['teacher']}>
-              <TeacherDashboard />
+              <Routes>
+                <Route path="/" element={<TeacherDashboard />}>
+                  <Route index element={<Navigate replace to="create" />} />
+                  <Route path="shsms" element={<SHSMs />} />
+                  <Route path="messages" element={<Messages_Teacher />} />
+                  <Route path="edit-profile" element={<EditProfile_Teacher />} />
+                </Route>
+              </Routes>
             </ProtectedRoute>
           } />
 
