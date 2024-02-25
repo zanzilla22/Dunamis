@@ -308,11 +308,11 @@ app.get('/shsms/:program', authenticateToken, async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-app.post('/shsms', authenticateToken, async (req, res) => {
+app.post('/shsms',  async (req, res) => {
   const shsm = new SHSM(req.body);
   try {
     const newSHSM = await shsm.save();
-    res.status(201).json(newCoop);
+    res.status(201).json(newSHSM);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
