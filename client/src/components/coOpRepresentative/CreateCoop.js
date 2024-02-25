@@ -19,7 +19,7 @@ const CreateCoop = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/coops', coopData);
+      const response = await axios.post('https://dunamis-api.vercel.app/coops', coopData);
       const newCoopId = response.data._id;
       // Add logic to update CoOp Manager's availableCoopIds with newCoopId
       console.log('Coop created successfully with ID:', newCoopId);

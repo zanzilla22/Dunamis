@@ -2,13 +2,24 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import LoginPage from './components/LoginPage';
+
+// dashboards
 import StudentDashboard from './components/Student/StudentDashboard';
 import TeacherDashboard from './components/Teacher/TeacherDashboard';
-import CoOpManagerDashboard from './components/CoOpManager/CoOpManagerDashboard';
-import ECs from './components/Student/ECs'; // Assuming this component exists
-import CoOps from './components/Student/CoOps'; // Assuming this component exists
-import Messages from './components/Student/Messages'; // Assuming this component exists
-import EditProfile from './components/Student/EditProfile'; // Assuming this component exists
+import CoOpManagerDashboard from './components/coOpRepresentative/CoOpManagerDashboard';
+
+// student dashboard elements
+import ECs from './components/Student/ECs';
+import CoOps from './components/Student/CoOps';
+import Messages from './components/Student/Messages';
+import EditProfile from './components/Student/EditProfile';
+
+// coop dashboard elements
+import CreateCoop from './components/coOpRepresentative/CreateCoop';
+import ListedCoops from './components/coOpRepresentative/ListedCoops';
+import Messages_Coop from './components/coOpRepresentative/Messages';
+import EditProfile_Coop from './components/coOpRepresentative/EditProfile';
+
 import { ProtectedRoute } from './components/ProtectedRoute'; // Assuming this component exists
 
 function App() {
@@ -41,9 +52,17 @@ function App() {
           } />
 
           {/* Co-Op Manager Routes */}
-          <Route path="/coOpRepresentative" element={
+          <Route path="/coOpRepresentative/*" element={
             <ProtectedRoute allowedRoles={['coOpRepresentative']}>
-              <CoOpManagerDashboard />
+              <Routes>
+                <Route path="/" element={<CoOpManagerDashboard />}>
+                  <Route index element={<Navigate replace to="create" />} />
+                  <Route path="create" element={<CreateCoop />} />
+                  <Route path="listedcoops" element={<ListedCoops />} />
+                  <Route path="messages" element={<Messages_Coop />} />
+                  <Route path="edit-profile" element={<EditProfile_Coop />} />
+                </Route>
+              </Routes>
             </ProtectedRoute>
           } />
 
@@ -72,9 +91,9 @@ const RedirectToDashboard = () => {
     case 'teacher':
       console.log('Redirecting to teacher dashboard...');
       return <Navigate to="/teacher" replace />;
-    case 'co-op-manager':
+    case 'coOpRepresentative':
       console.log('Redirecting to co-op manager dashboard...');
-      return <Navigate to="/co-op-manager" replace />;
+      return <Navigate to="/coOpRepresentative" replace />;
     default:
       console.log('Role not recognized, redirecting to login...');
       return <Navigate to="/" replace />;

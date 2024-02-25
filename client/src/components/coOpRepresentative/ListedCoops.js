@@ -7,7 +7,7 @@ const ListedCoops = () => {
   useEffect(() => {
     const fetchCoops = async () => {
       try {
-        const response = await axios.get('/coops/available');
+        const response = await axios.get('https://dunamis-api.vercel.app/coops/available');
         setCoops(response.data);
       } catch (error) {
         console.error('Error fetching coops:', error);

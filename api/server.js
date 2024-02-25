@@ -190,6 +190,15 @@ app.post('/coops', async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
+app.get('/coops/available', authenticateToken, async (req, res) => {
+  try {
+    const coOpManagerId = req.user.id; // Assuming you have authenticated the request and stored user ID in req.user.id
+    const coOpManager = await CoOpRepresentative.findById(coOpManagerId).populate('availableCoopIds');
+    res.json(coOpManager.availableCoopIds);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 
-const EditProfile = () => {
+const EditProfile_Coop = () => {
   const { logout } = useAuth();
   const [profile, setProfile] = useState({
     nameFirst: '',
@@ -146,4 +146,4 @@ const EditProfile = () => {
   );
 };
 
-export default EditProfile;
+export default EditProfile_Coop;

@@ -22,7 +22,7 @@ const MessagesSection = ({ messages }) => (
   </div>
 );
 
-const Messages = () => {
+const Messages_Coop = () => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -45,4 +45,4 @@ const Messages = () => {
   );
 };
 
-export default Messages;
+export default Messages_Coop;

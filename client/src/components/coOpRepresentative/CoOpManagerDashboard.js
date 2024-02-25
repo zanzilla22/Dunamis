@@ -3,8 +3,8 @@ import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import Header from '../headers/coopHeader';
 import CreateCoop from './CreateCoop'; // Assume this component is created for EC's view
 import ListedCoops from './ListedCoops'; // Assume this component is created for Co-ops view
-import Messages from './Messages'; // Assume this component is created for Messages view
-import EditProfile from './EditProfile'; // Assume this component is created for Edit Profile view
+import Messages_Coop from './Messages'; // Assume this component is created for Messages view
+import EditProfile_Coop from './EditProfile'; // Assume this component is created for Edit Profile view
 
 const CoopManagerDashboard = () => {
   let navigate = useNavigate();
@@ -18,8 +18,8 @@ const CoopManagerDashboard = () => {
           <Route path="/" element={<Navigate replace to="create" />} /> {/* Default redirect to create listing */}
           <Route path="create" element={<CreateCoop />} />
           <Route path="listedcoops" element={<ListedCoops />} />
-          <Route path="messages" element={<Messages />} />
-          <Route path="edit-profile" element={<EditProfile />} />
+          <Route path="messages" element={<Messages_Coop />} />
+          <Route path="edit-profile" element={<EditProfile_Coop />} />
         </Routes>
       </div>
     </div>
