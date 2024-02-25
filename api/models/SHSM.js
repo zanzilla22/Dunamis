@@ -7,7 +7,7 @@ const shsmSchema = new Schema({
   logoUrl: String,
   applyLink: { type: String, required: true },
   companyName: { type: String, required: true },
-  shsms: [{ type: String }]
+  SHSMs: [{ type: String }]
 });
 
 const SHSM = mongoose.model('SHSM', shsmSchema);
