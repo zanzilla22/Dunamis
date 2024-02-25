@@ -68,7 +68,7 @@ const EditProfile_Coop = () => {
       },
     });
     console.log('Profile updated successfully');
-    navigate('/coOpRepresentative/listedcoops'); // Redirect after successful update
+    navigate('/'); // Redirect after successful update
   } catch (error) {
     console.error('Error updating profile:', error);
   }
