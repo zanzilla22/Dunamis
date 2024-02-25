@@ -112,6 +112,44 @@ const loginUser = async (Model, role, req, res) => {
   }
 };
 
+const getUserModel = (role) => {
+  const models = {
+    student: Student,
+    teacher: Teacher,
+    coOpRepresentative: CoOpRepresentative,
+  };
+  return models[role] || null;
+};
+
+const fetchUserProfile = async (model, userId) => {
+  try {
+    const user = await model.findById(userId);
+    if (!user) {
+      return { error: "User not found", statusCode: 404 };
+    }
+    // Optionally, exclude sensitive information
+    const { password, ...profileData } = user.toObject();
+    return { profileData, statusCode: 200 };
+  } catch (error) {
+    console.error("Error fetching user profile:", error);
+    return { error: "Server error", statusCode: 500 };
+  }
+};
+
+const updateUserProfile = async (model, userId, updates) => {
+  try {
+    const user = await model.findByIdAndUpdate(userId, updates, { new: true });
+    if (!user) {
+      return { error: "User not found", statusCode: 404 };
+    }
+    return { user, statusCode: 200 };
+  } catch (error) {
+    console.error("Error updating user profile:", error);
+    return { error: "Server error", statusCode: 500 };
+  }
+};
+
+
 
 
 
@@ -222,37 +260,36 @@ app.get('/my-coops', authenticateToken, async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-// Update CoOpRepresentative profile
-app.put('/coops/profile', authenticateToken, async (req, res) => {
-  const updates = req.body;
-  try {
-    // req.user.id is set by the authenticateToken middleware
-    const coOpRepresentative = await CoOpRepresentative.findByIdAndUpdate(req.user.id, updates, { new: true });
-    if (!coOpRepresentative) {
-      return res.status(404).json({ message: "CoOpRepresentative not found" });
-    }
-    res.json(coOpRepresentative);
-  } catch (error) {
-    console.error("Failed to update CoOpRepresentative profile:", error);
-    res.status(500).json({ message: error.message });
+
+
+// Fetch user profile
+app.get('/profile', authenticateToken, async (req, res) => {
+  const model = getUserModel(req.user.role);
+  if (!model) {
+    return res.status(400).json({ message: "Invalid user role" });
   }
-});
-// Fetch the profile of the authenticated CoOpRepresentative
-app.get('/coops/profile', authenticateToken, async (req, res) => {
-  try {
-    // The authenticated user's ID is stored in req.user.id
-    const coOpRepresentative = await CoOpRepresentative.findById(req.user.id);
-    if (!coOpRepresentative) {
-      return res.status(404).json({ message: "Profile not found" });
-    }
-    // Optionally, exclude sensitive information from the response
-    const { password, ...profileData } = coOpRepresentative.toObject();
-    res.json(profileData);
-  } catch (error) {
-    console.error("Failed to fetch profile:", error);
-    res.status(500).json({ message: error.message });
+
+  const { profileData, error, statusCode } = await fetchUserProfile(model, req.user.id);
+  if (error) {
+    return res.status(statusCode).json({ message: error });
   }
+  res.json(profileData);
 });
+
+// Update user profile
+app.put('/profile', authenticateToken, async (req, res) => {
+  const model = getUserModel(req.user.role);
+  if (!model) {
+    return res.status(400).json({ message: "Invalid user role" });
+  }
+
+  const { user, error, statusCode } = await updateUserProfile(model, req.user.id, req.body);
+  if (error) {
+    return res.status(statusCode).json({ message: error });
+  }
+  res.json(user);
+});
+
 
 
 

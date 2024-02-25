@@ -13,7 +13,7 @@ const studentSchema = new Schema({
   resume: String,
   description: String,
   transcript: String,
-  outgoingApplicationIds: [{ type: Schema.Types.ObjectId, ref: 'CoopListing' }],
+  outgoingApplicationIds: [{ type: Schema.Types.ObjectId, ref: 'CoOp' }],
   school: String,
   district: String,
   regionalProgram: String

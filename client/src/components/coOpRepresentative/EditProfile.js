@@ -21,7 +21,7 @@ const EditProfile_Coop = () => {
   const fetchProfile = async () => {
     if (currentUser?.token) {
       try {
-        const response = await axios.get('https://dunamis-api.vercel.app/coops/profile', { // Corrected URL
+        const response = await axios.get('https://dunamis-api.vercel.app/profile', {
           headers: {
             Authorization: `Bearer ${currentUser.token}`,
           },
@@ -61,7 +61,7 @@ const EditProfile_Coop = () => {
     return;
   }
   try {
-    await axios.put('https://dunamis-api.vercel.app/coops/profile', profile, { // Corrected URL
+    await axios.put('https://dunamis-api.vercel.app/profile', profile, {
       headers: {
         Authorization: `Bearer ${currentUser.token}`,
         'Content-Type': 'application/json',
