@@ -104,7 +104,7 @@ function LoginPage() {
             <option value="">Select Role</option>
             <option value="student">Student</option>
             <option value="teacher">Teacher</option>
-            <option value="co_op_representative">Co-Op Representative</option>
+            <option value="coOpRepresentative">Co-Op Representative</option>
           </select>
 
           </div>
