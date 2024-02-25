@@ -170,7 +170,7 @@ app.post('/opportunities', async (req, res) => {
 });
 
 //coop logic
-const CoOp = require('./models/Co-Op');
+const CoOp = require('./models/CoOp');
 app.get('/coops', async (req, res) => {
   try {
     const coops = await CoOp.find();
