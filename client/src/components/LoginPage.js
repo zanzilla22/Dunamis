@@ -11,7 +11,7 @@ function LoginPage() {
   const [nameFirst, setNameFirst] = useState("");
   const [nameLast, setNameLast] = useState("");
   const [error, setError] = useState("");
-  const api_base = 'https://dunamis-api.vercel.app/';
+  const api_base = 'https://dunamis-api.vercel.app';
   const navigate = useNavigate();
   const { login, currentUser } = useAuth();
 
