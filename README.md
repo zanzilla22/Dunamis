@@ -2,6 +2,8 @@
 _Dunamis (Ancient Greek: δύναμις) is a Greek philosophical concept meaning "power", "potential" or "ability"_
 
 CNLC '24 Coding Submission | Platform where students, co-op managers, SHSM heads and organizers can collaborate.
+# Now deployed on https://mydunamis.vercel.app
+
 ## High-Level Summary
 Dunamis is a comprehensive platform designed to bridge the gap between students, educators, and businesses in career development and co-operative education. 
 It leverages technology to provide an integrated environment where users can explore educational opportunities, co-op placements, and professional mentorship.
