@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../context/AuthContext'; // Adjust the path accordingly
 
-const OpportunityCard = ({ title, location, logoUrl, companyName, applyLink }) => (
+const OpportunityCard = ({ title, companyLink, logoUrl, companyName, repInfo }) => (
   <div className="flex flex-col sm:flex-row justify-between items-center gap-5 py-9 px-8 mt-6 bg-white rounded-xl border border-gray-200 shadow-lg w-full max-w-4xl">
     <div className="flex flex-1"> {/* Add flex-1 to make the left side grow and fill space */}
       <div className="flex justify-center items-center w-full sm:w-auto sm:px-1.5 rounded-xl bg-indigo-800 bg-opacity-50 h-[200px] w-[93px]">
@@ -18,12 +18,16 @@ const OpportunityCard = ({ title, location, logoUrl, companyName, applyLink }) =
         </div>
         <div className="flex gap-2 px-5 py-3.5 mt-3.5 text-black rounded-lg bg-neutral-100">
           <img loading="lazy" src="https://static-00.iconduck.com/assets.00/location-position-icon-1640x2048-6jqx3f7e.png" alt="Location icon" className="w-[20px]" />
-          <div className="grow">{location}</div>
+          <div className="grow">
+            <a href={companyLink} target="_blank">
+              {companyLink}
+            </a>
+          </div>
         </div>
       </div>
     </div>
     <div className="flex sm:justify-end mt-4 sm:mt-0"> {/* Use justify-end to align the button to the right */}
-      <a href={applyLink} target="_blank" rel="noopener noreferrer" className="inline-block px-9 py-4 text-white bg-indigo-800 rounded-lg whitespace-nowrap">
+      <a href={repInfo} target="_blank" rel="noopener noreferrer" className="inline-block px-9 py-4 text-white bg-indigo-800 rounded-lg whitespace-nowrap">
         Quick Contact
       </a>
     </div>
