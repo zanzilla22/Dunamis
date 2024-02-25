@@ -6,11 +6,12 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config(); // To use environment variables for sensitive information
 
 const app = express();
+app.use(express.json());
 
-// Adjusted CORS options to ensure proper handling
-// Note: specifying an array for origin might cause issues with credentials: true. Consider dynamically setting the origin based on the request.
+// cors from frontend deployment url
 const corsOptions = {
   origin: function(origin, callback) {
+    console.log("Origin attempting to access the resource:", origin);
     const allowedOrigins = ["https://mydunamis.vercel.app", "http://localhost:3000"];
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
@@ -19,14 +20,11 @@ const corsOptions = {
     }
   },
   methods: ["POST", "GET"],
-  credentials: true, // This is important for sessions or authenticated requests
+  credentials: true,
 };
 
-// Apply CORS before any other middleware to ensure it's applied universally
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); // Enable preflight requests for all routes
 
-app.use(express.json());
 
 // Environment variables
 const PORT = process.env.PORT || 3001;
