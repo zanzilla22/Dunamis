@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const opportunitySchema = new Schema({
+const coopSchema = new Schema({
   title: { type: String, required: true },
   location: { type: String, required: true },
   logoUrl: String,
@@ -11,6 +11,6 @@ const opportunitySchema = new Schema({
   categories: [{ type: String }]
 });
 
-const CoOp = mongoose.model('CoOp', opportunitySchema);
+const CoOp = mongoose.model('CoOp', coopSchema);
 
 module.exports = CoOp;

@@ -170,26 +170,26 @@ app.post('/opportunities', async (req, res) => {
 });
 
 //coop logic
-const CoOp = require('./models/CoOp');
-app.get('/coops', async (req, res) => {
-  try {
-    const coops = await CoOp.find();
-    res.json(coops);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
-// Endpoint to create a new opportunity
-app.post('/coops', async (req, res) => {
-  const coop = new CoOp(req.body);
-  try {
-    const newCoop = await coop.save();
-    res.status(201).json(newCoop);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-});
+// const CoOp = require('./models/CoOp');
+// app.get('/coops', async (req, res) => {
+//   try {
+//     const coops = await CoOp.find();
+//     res.json(coops);
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// });
+//
+// // Endpoint to create a new opportunity
+// app.post('/coops', async (req, res) => {
+//   const coop = new CoOp(req.body);
+//   try {
+//     const newCoop = await coop.save();
+//     res.status(201).json(newCoop);
+//   } catch (error) {
+//     res.status(400).json({ message: error.message });
+//   }
+// });
 
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
