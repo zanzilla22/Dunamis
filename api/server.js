@@ -292,7 +292,31 @@ app.put('/profile', authenticateToken, async (req, res) => {
 
 
 
+const SHSM = require('./models/SHSM'); // Adjust the path as necessary
 
+// Fetch SHSMs that match a specific program
+app.get('/shsms/:program', authenticateToken, async (req, res) => {
+  const { program } = req.params;
+  try {
+    const shsms = await SHSM.find({ shsms: program });
+    if (shsms.length === 0) {
+      return res.status(404).json({ message: "No SHSMs found for this program" });
+    }
+    res.json(shsms);
+  } catch (error) {
+    console.error("Failed to fetch SHSMs:", error);
+    res.status(500).json({ message: error.message });
+  }
+});
+app.post('/shsms', authenticateToken, async (req, res) => {
+  const shsm = new SHSM(req.body);
+  try {
+    const newSHSM = await shsm.save();
+    res.status(201).json(newCoop);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
 
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

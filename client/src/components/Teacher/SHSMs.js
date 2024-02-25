@@ -45,30 +45,39 @@ const ShsmsSection = ({ shsms }) => (
 const SHSMs = () => {
   const { currentUser } = useAuth(); // Use the useAuth hook to access the current user
   const [shsms, setShsms] = useState([]);
+  const [teacherShsmProgram, setTeacherShsmProgram] = useState('');
 
   useEffect(() => {
-    const fetchShsms = async () => {
+    const fetchTeacherProfile = async () => {
       if (!currentUser || !currentUser.token) {
         console.error("No user token available. Please login.");
         return;
       }
 
       try {
-        // Fetching SHSMs that match the teacher's SHSM program
-        console.log(currentUser);
-        const response = await axios.get(`https://dunamis-api.vercel.app/shsms/${currentUser.shsmProgram}`, {
+        // Fetch teacher's profile to get SHSM program
+        const profileResponse = await axios.get('https://dunamis-api.vercel.app/profile', {
           headers: {
             Authorization: `Bearer ${currentUser.token}`,
           },
         });
-        setShsms(response.data); // Assuming the response data is the list of SHSMs
+        const { shsmProgram } = profileResponse.data;
+        setTeacherShsmProgram(shsmProgram);
+
+        // Then fetch SHSMs that match the teacher's SHSM program
+        const shsmResponse = await axios.get(`https://dunamis-api.vercel.app/shsms/${shsmProgram}`, {
+          headers: {
+            Authorization: `Bearer ${currentUser.token}`,
+          },
+        });
+        setShsms(shsmResponse.data);
       } catch (error) {
         console.error("Failed to load SHSMs:", error);
       }
     };
 
-    fetchShsms();
-  }, [currentUser]); // Depend on currentUser to refetch when it changes
+    fetchTeacherProfile();
+  }, [currentUser]);
 
   return (
     <div className="block !important">
