@@ -185,6 +185,9 @@ app.post('/coops', async (req, res) => {
   const coop = new CoOp(req.body);
   try {
     const newCoop = await coop.save();
+    await CoOpRepresentative.findByIdAndUpdate(req.user.id, {
+      $push: { availableCoopIds: newCoop._id }
+    });
     res.status(201).json(newCoop);
   } catch (error) {
     res.status(400).json({ message: error.message });
