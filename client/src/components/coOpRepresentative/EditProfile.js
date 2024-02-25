@@ -12,7 +12,9 @@ const EditProfile_Coop = () => {
     nameLast: '',
     description: '',
     company: '',
-    role: ''
+    role: '',
+    targetSHSMs: [],
+    targetCourses: []
   });
 
   useEffect(() => {
@@ -37,11 +39,20 @@ const EditProfile_Coop = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setProfile(prevProfile => ({
-      ...prevProfile,
-      [name]: value
-    }));
+    if (e.target.type === "select-multiple") {
+      const selectedOptions = Array.from(e.target.selectedOptions).map(option => option.value);
+      setProfile(prevProfile => ({
+        ...prevProfile,
+        [name]: selectedOptions
+      }));
+    } else {
+      setProfile(prevProfile => ({
+        ...prevProfile,
+        [name]: value
+      }));
+    }
   };
+
 
   const handleSubmit = async (e) => {
   e.preventDefault();
@@ -57,7 +68,7 @@ const EditProfile_Coop = () => {
       },
     });
     console.log('Profile updated successfully');
-    navigate('/ecs'); // Redirect after successful update
+    navigate('/coOpRepresentative/listedcoops'); // Redirect after successful update
   } catch (error) {
     console.error('Error updating profile:', error);
   }
@@ -74,13 +85,13 @@ const EditProfile_Coop = () => {
           {/* First Name */}
           <div className="mb-4">
             <label htmlFor="nameFirst" className="block text-sm font-medium text-gray-700">First Name</label>
-            <input type="text" id="nameFirst" name="nameFirst" value={profile.nameFirst} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
+            <input type="text" id="nameFirst" name="nameFirst" value={profile.nameFirst || ''} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
           </div>
 
           {/* Last Name */}
           <div className="mb-4">
             <label htmlFor="nameLast" className="block text-sm font-medium text-gray-700">Last Name</label>
-            <input type="text" id="nameLast" name="nameLast" value={profile.nameLast} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
+            <input type="text" id="nameLast" name="nameLast" value={profile.nameLast || ''} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
           </div>
 
           {/* Email, I want this to be displayed but not editable */}
@@ -88,25 +99,45 @@ const EditProfile_Coop = () => {
           {/* Description */}
           <div className="mb-4">
             <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description</label>
-            <textarea id="description" name="description" value={profile.description} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+            <textarea id="description" name="description" value={profile.description || ''} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"></textarea>
           </div>
 
           {/* Company */}
           <div className="mb-4">
             <label htmlFor="company" className="block text-sm font-medium text-gray-700">Company</label>
-            <input type="text" id="company" name="company" value={profile.company} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
+            <input type="text" id="company" name="company" value={profile.company || ''} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
           </div>
 
           {/* Role */}
           <div className="mb-4">
             <label htmlFor="district" className="block text-sm font-medium text-gray-700">Role</label>
-            <input type="text" id="role" name="role" value={profile.role} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
+            <input type="text" id="role" name="role" value={profile.role || ''} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
           </div>
 
 
-          {/* Multi-select target SHSMS */}
+          {/* Multi-select for target SHSMs */}
+          <div className="mb-4">
+            <label htmlFor="targetSHSMs" className="block text-sm font-medium text-gray-700">Target SHSMs</label>
+            <select multiple id="targetSHSMs" name="targetSHSMs" value={profile.targetSHSMs || []} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+              {/* Example options - adjust as necessary */}
+              <option value="Health and Wellness">Health and Wellness</option>
+              <option value="Engineering">Engineering</option>
+              <option value="Business">Business</option>
+              {/* Add more options as needed */}
+            </select>
+          </div>
 
-          {/* Multi-select targetCourses */}
+          {/* Multi-select for target Courses */}
+          <div className="mb-4">
+            <label htmlFor="targetCourses" className="block text-sm font-medium text-gray-700">Target Courses</label>
+            <select multiple id="targetCourses" name="targetCourses" value={profile.targetCourses || []} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+              {/* Example options - adjust as necessary */}
+              <option value="Computer Science">Computer Science</option>
+              <option value="Advanced Functions">Advanced Functions</option>
+              <option value="Biology">Biology</option>
+              {/* Add more options as needed */}
+            </select>
+          </div>
 
           <button type="submit" className="mt-4 w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             Save Changes
