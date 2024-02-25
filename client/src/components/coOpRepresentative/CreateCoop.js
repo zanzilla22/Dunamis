@@ -19,6 +19,7 @@ const CreateCoop = () => {
   };
 
   const handleSubmit = async (e) => {
+    console.log(`Bearer ${currentUser.token}`); // Debug: Log the token
     e.preventDefault();
     if (!currentUser || !currentUser.token) {
       console.error("No user token available. Please login.");

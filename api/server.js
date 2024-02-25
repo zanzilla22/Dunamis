@@ -46,14 +46,21 @@ const { Student, Teacher, CoOpRepresentative } = require('./models/User');
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
-  if (token == null) return res.sendStatus(401);
+  if (token == null) return res.sendStatus(401); // No token was provided
+
+  console.log(`Token received: ${token}`); // Debug: Log received token
 
   jwt.verify(token, jwtSecret, (err, user) => {
-    if (err) return res.sendStatus(403);
+    if (err) {
+      console.log(`Token verification error: ${err.message}`); // Debug: Log verification error
+      return res.sendStatus(403); // Token is not valid
+    }
+    console.log(`User from token: ${user.id}`); // Debug: Log user ID from token
     req.user = user;
     next();
   });
 };
+
 
 // Generalized user registration
 const registerUser = async (Model, req, res) => {
