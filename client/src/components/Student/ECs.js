@@ -172,7 +172,7 @@ const ECs = () => {
   const [visibleCount, setVisibleCount] = useState(10); // Number of opportunities currently visible
 
   useEffect(() => {
-     fetch('/lists/opportunities.json')
+     fetch('https://dunamis-api.vercel.app/opportunities')
        .then(response => response.json())
        .then(data => {
          setOpportunities(data);

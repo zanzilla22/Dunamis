@@ -144,4 +144,31 @@ app.get('/protected', authenticateToken, (req, res) => {
   res.json({ message: "Access to protected data" });
 });
 
+
+
+
+// opp logic
+const Opportunity = require('./models/Opportunity');
+app.get('/opportunities', async (req, res) => {
+  try {
+    const opportunities = await Opportunity.find();
+    res.json(opportunities);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Endpoint to create a new opportunity
+app.post('/opportunities', async (req, res) => {
+  const opportunity = new Opportunity(req.body);
+  try {
+    const newOpportunity = await opportunity.save();
+    res.status(201).json(newOpportunity);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+
+
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
