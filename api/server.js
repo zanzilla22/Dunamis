@@ -1,3 +1,7 @@
+const multer = require('multer');
+const storage = multer.memoryStorage(); // Stores files in memory
+const upload = multer({ storage: storage });
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -135,6 +139,52 @@ app.post('/:userType/login', async (req, res) => {
     res.status(400).json({ error: "Invalid user type" });
   }
 });
+
+app.post('/student/profile/update', authenticateToken, upload.fields([{ name: 'resume', maxCount: 1 }, { name: 'transcript', maxCount: 1 }]), async (req, res) => {
+  // req.user.id should contain the authenticated user's ID
+  // Update the student's profile with the provided information
+  // Files, if uploaded, are available in req.files
+
+  try {
+    const updatedData = req.body;
+    if (req.files) {
+      if (req.files.resume) {
+        // Handle resume file, e.g., upload to your storage solution and save the reference
+        updatedData.resume = /* logic to handle uploaded file */;
+      }
+      if (req.files.transcript) {
+        // Handle transcript file similarly
+        updatedData.transcript = /* logic to handle uploaded file */;
+      }
+    }
+
+    // Update student document in MongoDB
+    await Student.findByIdAndUpdate(req.user.id, updatedData, { new: true });
+
+    res.status(200).json({ message: "Profile updated successfully" });
+  } catch (error) {
+    console.error("Failed to update profile:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+app.get('/student/profile', authenticateToken, async (req, res) => {
+  try {
+    const studentId = req.user.id; // Assuming your authenticateToken middleware adds the user object to req
+
+    const studentProfile = await Student.findById(studentId);
+    if (!studentProfile) {
+      return res.status(404).json({ error: "Student profile not found" });
+    }
+
+    res.json(studentProfile);
+  } catch (error) {
+    console.error("Failed to fetch student profile:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+
 
 app.get("/", (req, res) => {
   res.json("DB");
