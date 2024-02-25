@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useAuth } from '../../context/AuthContext';
 import axios from 'axios';
 
 const CreateCoop = () => {
+  const { currentUser } = useAuth();
   const [coopData, setCoopData] = useState({
     title: '',
     location: '',
@@ -18,8 +20,16 @@ const CreateCoop = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!currentUser || !currentUser.token) {
+      console.error("No user token available. Please login.");
+      return;
+    }
     try {
-      const response = await axios.post('https://dunamis-api.vercel.app/coops', coopData);
+      const response = await axios.post('https://dunamis-api.vercel.app/coops', coopData, {
+        headers: {
+          Authorization: `Bearer ${currentUser.token}` // Include the token in the request headers
+        }
+      });
       const newCoopId = response.data._id;
       // Add logic to update CoOp Manager's availableCoopIds with newCoopId
       console.log('Coop created successfully with ID:', newCoopId);
