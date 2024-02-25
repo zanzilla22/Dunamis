@@ -10,40 +10,30 @@ const EditProfile_Coop = () => {
   const [profile, setProfile] = useState({
     nameFirst: '',
     nameLast: '',
-    email: '',
     description: '',
-    school: '',
-    district: '',
-    regionalProgram: ''
-    // Note: Initial state for files such as resume and transcript is not included
-    // because file inputs cannot be prefilled due to security reasons.
-  });
-
-  // State to keep track of existing files (if any)
-  const [existingFiles, setExistingFiles] = useState({
-    resume: '', // Placeholder for existing resume file name or URL
-    transcript: '' // Placeholder for existing transcript file name or URL
+    company: '',
+    role: ''
   });
 
   useEffect(() => {
-    // Assuming '/api/coop/profile' is your endpoint for fetching the current user's profile
-    const fetchProfile = async () => {
+  const fetchProfile = async () => {
+    if (currentUser?.token) {
       try {
-        const { data } = await axios.get('https://dunamis-api.vercel.app/coop/profile', {
+        const response = await axios.get('https://dunamis-api.vercel.app/coops/profile', { // Corrected URL
           headers: {
             Authorization: `Bearer ${currentUser.token}`,
           },
         });
-        setProfile(data); // Adjust according to how your API sends the data
+        setProfile(response.data);
       } catch (error) {
         console.error('Failed to fetch profile:', error);
       }
-    };
-
-    if (currentUser?.token) {
-      fetchProfile();
     }
-  }, [currentUser]);
+  };
+
+  fetchProfile();
+}, [currentUser]);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -55,19 +45,24 @@ const EditProfile_Coop = () => {
 
   const handleSubmit = async (e) => {
   e.preventDefault();
+  if (!currentUser || !currentUser.token) {
+    console.error("No user token available. Please login.");
+    return;
+  }
   try {
-    await axios.put('https://dunamis-api.vercel.app/coops/profile', profile, {
+    await axios.put('https://dunamis-api.vercel.app/coops/profile', profile, { // Corrected URL
       headers: {
         Authorization: `Bearer ${currentUser.token}`,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
     });
     console.log('Profile updated successfully');
-    navigate('/ecs'); // Assuming you want to redirect to a route named '/ecs'
+    navigate('/ecs'); // Redirect after successful update
   } catch (error) {
     console.error('Error updating profile:', error);
   }
 };
+
 
 
   return (

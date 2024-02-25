@@ -237,6 +237,23 @@ app.put('/coops/profile', authenticateToken, async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+// Fetch the profile of the authenticated CoOpRepresentative
+app.get('/coops/profile', authenticateToken, async (req, res) => {
+  try {
+    // The authenticated user's ID is stored in req.user.id
+    const coOpRepresentative = await CoOpRepresentative.findById(req.user.id);
+    if (!coOpRepresentative) {
+      return res.status(404).json({ message: "Profile not found" });
+    }
+    // Optionally, exclude sensitive information from the response
+    const { password, ...profileData } = coOpRepresentative.toObject();
+    res.json(profileData);
+  } catch (error) {
+    console.error("Failed to fetch profile:", error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
 
 
 
