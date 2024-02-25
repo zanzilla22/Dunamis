@@ -167,22 +167,22 @@ app.post('/student/profile/update', authenticateToken, upload.fields([{ name: 'r
     res.status(500).json({ error: "Internal server error" });
   }
 });
-
-app.get('/student/profile', authenticateToken, async (req, res) => {
-  try {
-    const studentId = req.user.id; // Assuming your authenticateToken middleware adds the user object to req
-
-    const studentProfile = await Student.findById(studentId);
-    if (!studentProfile) {
-      return res.status(404).json({ error: "Student profile not found" });
-    }
-
-    res.json(studentProfile);
-  } catch (error) {
-    console.error("Failed to fetch student profile:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
+// 
+// app.get('/student/profile', authenticateToken, async (req, res) => {
+//   try {
+//     const studentId = req.user.id; // Assuming your authenticateToken middleware adds the user object to req
+//
+//     const studentProfile = await Student.findById(studentId);
+//     if (!studentProfile) {
+//       return res.status(404).json({ error: "Student profile not found" });
+//     }
+//
+//     res.json(studentProfile);
+//   } catch (error) {
+//     console.error("Failed to fetch student profile:", error);
+//     res.status(500).json({ error: "Internal server error" });
+//   }
+// });
 
 
 
