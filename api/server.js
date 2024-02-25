@@ -126,7 +126,7 @@ app.post('/:userType/login', async (req, res) => {
   const userModels = {
     student: { model: Student, role: 'student' },
     teacher: { model: Teacher, role: 'teacher' },
-    coOpRepresentative: { model: CoOpRepresentative, role: 'co-op-manager' },
+    coOpRepresentative: { model: CoOpRepresentative, role: 'coOpRepresentative' },
   };
   if (userModels[userType]) {
     console.log("logging in as", userModels[userType].role);
