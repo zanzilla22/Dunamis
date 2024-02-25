@@ -181,7 +181,7 @@ app.get('/coops', async (req, res) => {
 });
 
 // Endpoint to create a new opportunity
-app.post('/coops', async (req, res) => {
+app.post('/coops', authenticateToken, async (req, res) => {
   const coop = new CoOp(req.body);
   try {
     const newCoop = await coop.save();
