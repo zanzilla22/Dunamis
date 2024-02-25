@@ -24,7 +24,7 @@ const OpportunityCard = ({ title, location, logoUrl, companyName, applyLink }) =
     </div>
     <div className="flex sm:justify-end mt-4 sm:mt-0"> {/* Use justify-end to align the button to the right */}
       <a href={applyLink} target="_blank" rel="noopener noreferrer" className="inline-block px-9 py-4 text-white bg-indigo-800 rounded-lg whitespace-nowrap">
-        Quick Apply
+        Applications
       </a>
     </div>
   </div>
