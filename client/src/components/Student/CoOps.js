@@ -34,12 +34,6 @@ const SearchBlock = ({ onSearch, onSelectCity, onSelectCategory  }) => {
 const CategorySelector = ({ onSelect }) => {
   const categories = [
     'All',
-    'Summer',
-    'Internship',
-    'Co-op',
-    'Olympiad',
-    'Competition',
-    'Volunteering',
     'Physics',
     'Engineering',
     'Chemistry',
@@ -49,10 +43,7 @@ const CategorySelector = ({ onSelect }) => {
     'Programming',
     'Arts',
     'Writing',
-    'Speaking',
-    'Business',
-    'Language',
-    'History'
+    'Business'
     // Add more categories as needed
   ];
 

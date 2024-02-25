@@ -36,7 +36,6 @@ const CategorySelector = ({ onSelect }) => {
     'All',
     'Summer',
     'Internship',
-    'Co-op',
     'Olympiad',
     'Competition',
     'Volunteering',
