@@ -59,7 +59,7 @@ const coOpRepresentativeSchema = new Schema({
   city: String,
   targetSHSMs: [{ type: String }],
   targetCourses: [{ type: String }],
-  availableCoopIds: [{ type: Schema.Types.ObjectId, ref: 'CoopListing' }]
+  availableCoopIds: [{ type: Schema.Types.ObjectId, ref: 'CoOp' }]
 });
 coOpRepresentativeSchema.pre('save', async function (next) {
   if (this.isModified('password')) {

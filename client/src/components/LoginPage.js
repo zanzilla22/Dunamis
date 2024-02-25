@@ -40,7 +40,7 @@ function LoginPage() {
     const adjustedRole = {
       'student': 'student',
       'teacher': 'teacher',
-      'co_op_representative': 'co-op-manager',
+      'co_op_representative': 'coOpRepresentative',
     }[userRole];
 
     try {
