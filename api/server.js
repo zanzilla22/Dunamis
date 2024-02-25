@@ -222,6 +222,22 @@ app.get('/my-coops', authenticateToken, async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+// Update CoOpRepresentative profile
+app.put('/coops/profile', authenticateToken, async (req, res) => {
+  const updates = req.body;
+  try {
+    // req.user.id is set by the authenticateToken middleware
+    const coOpRepresentative = await CoOpRepresentative.findByIdAndUpdate(req.user.id, updates, { new: true });
+    if (!coOpRepresentative) {
+      return res.status(404).json({ message: "CoOpRepresentative not found" });
+    }
+    res.json(coOpRepresentative);
+  } catch (error) {
+    console.error("Failed to update CoOpRepresentative profile:", error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
 
 
 

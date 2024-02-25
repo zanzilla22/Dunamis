@@ -56,7 +56,6 @@ const coOpRepresentativeSchema = new Schema({
   description: String,
   company: String,
   role: String,
-  city: String,
   targetSHSMs: [{ type: String }],
   targetCourses: [{ type: String }],
   availableCoopIds: [{ type: Schema.Types.ObjectId, ref: 'CoOp' }]
