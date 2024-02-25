@@ -1,9 +1,23 @@
 {
   "shsmPrograms": [
-    "Business",
-    "Health and Wellness",
-    "Information Technology",
-    "Arts and Culture",
-    "Agriculture"
+    "agriculture",
+    "arts and culture",
+    "aviation/aerospace",
+    "business",
+    "construction",
+    "energy",
+    "environment",
+    "food processing",
+    "forestry",
+    "health and wellness",
+    "horticulture and landscaping",
+    "hospitality and tourism",
+    "information and communications technology",
+    "justice, community safety, and emergency services",
+    "manufacturing",
+    "mining",
+    "non-profit",
+    "sports",
+    "transportation"
   ]
 }

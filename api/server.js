@@ -298,7 +298,7 @@ const SHSM = require('./models/SHSM'); // Adjust the path as necessary
 app.get('/shsms/:program', authenticateToken, async (req, res) => {
   const { program } = req.params;
   try {
-    const shsms = await SHSM.find({ shsms: program });
+    const shsms = await SHSM.find({ SHSMs: program });
     if (shsms.length === 0) {
       return res.status(404).json({ message: "No SHSMs found for this program" });
     }
