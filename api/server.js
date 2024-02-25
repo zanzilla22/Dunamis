@@ -46,20 +46,23 @@ const { Student, Teacher, CoOpRepresentative } = require('./models/User');
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
-  if (token == null) return res.sendStatus(401); // No token was provided
 
-  console.log(`Token received: ${token}`); // Debug: Log received token
+  if (!token) {
+    console.log("No token provided");
+    return res.sendStatus(401);
+  }
 
   jwt.verify(token, jwtSecret, (err, user) => {
     if (err) {
-      console.log(`Token verification error: ${err.message}`); // Debug: Log verification error
-      return res.sendStatus(403); // Token is not valid
+      console.log(`Token verification failed: ${err.message}`);
+      return res.sendStatus(403);
     }
-    console.log(`User from token: ${user.id}`); // Debug: Log user ID from token
+    console.log(`Token verified successfully for user ID: ${user.id}`);
     req.user = user;
     next();
   });
 };
+
 
 
 // Generalized user registration
@@ -200,15 +203,26 @@ app.post('/coops', authenticateToken, async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
-app.get('/coops/available', authenticateToken, async (req, res) => {
+app.get('/my-coops', authenticateToken, async (req, res) => {
   try {
-    const coOpManagerId = req.user.id; // Assuming you have authenticated the request and stored user ID in req.user.id
-    const coOpManager = await CoOpRepresentative.findById(coOpManagerId).populate('availableCoopIds');
-    res.json(coOpManager.availableCoopIds);
+    // Find the CoOpRepresentative document for the authenticated user
+    const coOpRepresentative = await CoOpRepresentative.findById(req.user.id);
+    if (!coOpRepresentative) {
+      return res.status(404).json({ message: "CoOpRepresentative not found" });
+    }
+
+    // Use the availableCoopIds array to fetch the corresponding co-ops
+    const coOps = await CoOp.find({
+      '_id': { $in: coOpRepresentative.availableCoopIds }
+    });
+
+    res.json(coOps);
   } catch (error) {
+    console.error("Failed to fetch co-ops:", error);
     res.status(500).json({ message: error.message });
   }
 });
+
 
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
