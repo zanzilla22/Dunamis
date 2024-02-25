@@ -20,7 +20,7 @@ function LoginPage() {
       const redirectToDashboard = {
         student: '/student',
         teacher: '/teacher',
-        coOpRepresentative: '/co-op-manager',
+        coOpRepresentative: '/coOpRepresentative',
       };
       const dashboardPath = redirectToDashboard[currentUser.role] || '/';
       navigate(dashboardPath);

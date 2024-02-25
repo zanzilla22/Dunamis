@@ -41,8 +41,8 @@ function App() {
           } />
 
           {/* Co-Op Manager Routes */}
-          <Route path="/co-op-manager" element={
-            <ProtectedRoute allowedRoles={['co-op-manager']}>
+          <Route path="/coOpRepresentative" element={
+            <ProtectedRoute allowedRoles={['coOpRepresentative']}>
               <CoOpManagerDashboard />
             </ProtectedRoute>
           } />
