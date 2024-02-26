@@ -8,7 +8,7 @@ require('dotenv').config(); // To use environment variables for sensitive inform
 const app = express();
 app.use(express.json());
 
-cors from frontend deployment url
+// cors from frontend deployment url
 const corsOptions = {
   origin: function(origin, callback) {
     console.log("Origin attempting to access the resource:", origin);
