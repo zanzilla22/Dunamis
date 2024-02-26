@@ -15,7 +15,7 @@ const corsOptions = {
     const allowedOrigins = [
       "https://mydunamis.vercel.app",
       "http://localhost:3000",
-      "https://www.mydunamis.ca:,
+      "https://www.mydunamis.ca",
       "https://mydunamis.ca"
     ];
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
