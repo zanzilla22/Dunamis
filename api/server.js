@@ -12,7 +12,11 @@ app.use(express.json());
 const corsOptions = {
   origin: function(origin, callback) {
     console.log("Origin attempting to access the resource:", origin);
-    const allowedOrigins = ["https://mydunamis.vercel.app", "http://localhost:3000"];
+    const allowedOrigins = [
+      "https://mydunamis.vercel.app",
+      "http://localhost:3000",
+      "https://www.mydunamis.ca/"
+    ];
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
